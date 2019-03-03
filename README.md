@@ -3,5 +3,5 @@
 This Project is done under **Dr.Ram Bilas Pachori** Sir.  
  Project participants <br />
 - Mudda Himanth <br />
-- Aditya Abhiram(https://github.com/Aa20475) <br />
+- [Aditya Abhiram](https://github.com/Aa20475) <br />
 - [Srinath](https://github.com/srinath1999) <br />
