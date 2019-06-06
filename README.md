@@ -8,8 +8,8 @@ This Project is done under **Dr.Ram Bilas Pachori** Sir.
 
 The project is made using Python
 
-Preinstalled packages needed:
+<b>Preinstalled packages needed:</b>
 
-<b>Scipy<br>
+Scipy<br>
 Numpy<br>
-Matplotlib</b>
+Matplotlib
