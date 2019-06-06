@@ -13,4 +13,5 @@ The project is made using Python
 <li>Scipy<br></li>
 <li>Numpy<br></li>
 <li>Matplotlib</li>
+<li>WFDB</li>
 </ul>
