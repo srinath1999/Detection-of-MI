@@ -5,3 +5,11 @@ This Project is done under **Dr.Ram Bilas Pachori** Sir.
 - Mudda Himanth <br />
 - [Aditya Abhiram](https://github.com/Aa20475) <br />
 - [Srinath](https://github.com/srinath1999) <br />
+
+The project is made using Python
+
+Preinstalled packages needed:
+
+Scipy<br>
+Numpy<br>
+Matplotlib
