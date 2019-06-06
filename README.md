@@ -10,6 +10,6 @@ The project is made using Python
 
 Preinstalled packages needed:
 
-Scipy<br>
+<b>Scipy<br>
 Numpy<br>
-Matplotlib
+Matplotlib</b>
