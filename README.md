@@ -9,7 +9,8 @@ This Project is done under **Dr.Ram Bilas Pachori** Sir.
 The project is made using Python
 
 <b>Preinstalled packages needed:</b>
-
-Scipy<br>
-Numpy<br>
-Matplotlib
+<ul>
+<li>Scipy<br></li>
+<li>Numpy<br></li>
+<li>Matplotlib</li>
+</ul>
