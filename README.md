@@ -2,7 +2,7 @@
 
 This Project is done under **Dr.Ram Bilas Pachori** Sir.  
  Project participants : <br />
-- Mudda Himanth <br />
+- [Mudda Himanth](https://github.com/himanth8065) <br />
 - [Aditya Abhiram](https://github.com/Aa20475) <br />
 - [Srinath](https://github.com/srinath1999) <br />
 
