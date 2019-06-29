@@ -2,7 +2,7 @@
 
 This Project is done under **Dr.Ram Bilas Pachori** Sir.  
  Project participants : <br />
-- Mudda Himanth <br />
+- [Mudda Himanth](https://github.com/himanth8065) <br />
 - [Aditya Abhiram](https://github.com/Aa20475) <br />
 - [Srinath](https://github.com/srinath1999) <br />
 
@@ -14,4 +14,5 @@ The project is made using Python
 <li>Numpy(<code>pip install numpy</code>)<br></li>
 <li>Matplotlib(<code>pip install matplotlib</code>)<br></li>
 <li>WFDB(<code>pip install wfdb</code>)<br></li>
+ <li>python-tk(<code>sudo apt-get install python-tk</code>)</li>
 </ul>
