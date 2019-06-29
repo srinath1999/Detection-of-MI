@@ -1,30 +1,45 @@
 import ewtpy as ew
 import wfdb
 import numpy as np
+import scipy.stats as st
 import matplotlib.pyplot as plt
+import timeit
 
-signals , fields = wfdb.rdsamp("s0010_re",sampto=4000)
+start = timeit.default_timer()
 
-v1=[]
+file= "s0010_re"
 
-for p in range(len(signals)):
-	v1.append(signals[p][6])
+signals , fields = wfdb.rdsamp(file,sampto=4000)
 
-v1 = np.array(v1)
+f_v = open(file +"_kurtosis_vector.txt","w+")
+p_v = open(file + "_entropy_vector.txt","w+")
+y_v = open(file+"_skewness_vector.txt","w+")
 
-plt.plot(v1)
-plt.show()
-
-ewt,mfb,boundaries = ew.EWT1D(v1,N=9,type = "fbse")
-
+kurtosis_vector = []
 
 
+for i in range(12):
+	sig = []
+	for p in range(len(signals)):
+		sig.append(signals[p][i])
 
-print(boundaries)
+	sig = np.array(sig)
 
-plt.plot(ewt)
-plt.show()
+	ewt, mfb,boundaries = ew.EWT1D(sig,N=9,type = "fbse")
+
+	for p in range(9):
+		sub_band = []
+		for m in range(len(ewt)):
+			sub_band.append(ewt[m][p])
+		np.array(sub_band)
+		f_v.write(str(st.kurtosis(sub_band))+"\n")
+		#p_v.write("Entropy Value here")
+		y_v.write(str(st.skew(sub_band))+"\n")
 
 
-plt.plot(mfb)
-plt.show()
+stop = timeit.default_timer()
+
+print('Time: ', stop - start)  
+
+
+
