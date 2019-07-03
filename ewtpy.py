@@ -18,18 +18,20 @@ def EWT1D(f, type = "fft",N = 5, log = 0,detect = "locmax", completion = 0, reg 
     ltemp = int(np.ceil(f.size/2)) #to behave the same as matlab's round
     fMirr =  np.append(np.flip(f[0:ltemp-1],axis = 0),f)  
     fMirr = np.append(fMirr,np.flip(f[-ltemp-1:-1],axis = 0))
-    ffMirr = np.fft.fft(fMirr)
-    
+    if type == "fft":
+        ffMirr = np.fft.fft(fMirr)
+    elif type == "fbse":
+        ffMirr = FBSE(fMirr)
     #build the corresponding filter bank
-    mfb=EWT_Meyer_FilterBank(boundaries,ffMirr.size)
+    mfb=EWT_Meyer_FilterBank(boundaries,ffMirr.size)    
     
     #filter the signal to extract each subband
     ewt = np.zeros(mfb.shape)
     for k in range(mfb.shape[1]):
-        ewt[:,k] = np.real(np.fft.ifft(np.conjugate(mfb[:,k])*ffMirr))  
+        ewt[:,k] = np.real(iFBSE(np.conj(mfb[:,k])*ffMirr))  
     ewt = ewt[ltemp-1:-ltemp,:]
     
-    return ewt,  mfb ,boundaries 
+    return ewt,  mfb ,boundaries
 
 def EWT_Boundaries_Detect(ff,log,detect, N, reg, lengthFilter,sigmaFilter):
     from scipy.ndimage.filters import gaussian_filter
@@ -220,23 +222,21 @@ def EWT_Meyer_Wavelet(wn,wm,gamma,Nsig):
     return ymw
             
 
-def FBSE(output):
-    fbse = []
-
-    N=len(output)
-    for x in range(N):
-        k=0
-        for i in range(N):
-            k = k+output[i]*np.sin(x*np.pi*i/N)
-        fbse.append(2*x*np.pi*k/N)
-    fbse = np.array(fbse)
+def FBSE(f):
+    fbse=np.zeros(len(f))
+    lin=np.linspace(np.pi/len(f),np.pi,len(f))
+    for x in range(1,len(f)):#this for loop is for fbse same like dft 
+        fbse = fbse + 2*lin*f[x-1]*np.sin(lin*(x-1))
     return fbse
 
+def iFBSE(ff):
+    infbse = np.zeros(len(ff))
+    lin = np.linspace(0.0,np.pi-np.pi/len(ff),len(ff))
+    for x in range(1,len(ff)):
+        infbse = infbse + (ff[x-1]/(x*np.pi))*np.sin(lin*x)
+    return infbse
 
 
-
-
-    
 
 
 
