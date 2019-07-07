@@ -13,24 +13,24 @@ def entropy(arr,bins=10):
 
 start = timeit.default_timer()
 
-data_dir = "Data/"
-
-folders = []
-
-for x in os.walk(data_dir):
-	if(x[1]!=[]):
-		folders = x[1]
 
 
+data_dir = "Data/PATHS"
 
-for currentfolder in folders:
-	curr_dir = data_dir+currentfolder+"/"+currentfolder
-	signals , fields = wfdb.rdsamp(curr_dir,sampto=4000)
+names = [line.rstrip('\n') for line in open(data_dir)]
 
-	f_v = open(curr_dir+"_kurtosis_vector.txt","w+")
-	p_v = open(curr_dir+ "_entropy_vector.txt","w+")
-	y_v = open(curr_dir+"_skewness_vector.txt","w+")
+heal_path = "Data/HEALTHY"
 
+heal_names = [line.rstrip('\n') for line in open(heal_path)]
+
+for name in names:
+	name = name.split("/")
+	signals , fields = wfdb.rdsamp(name[1],sampto=4000,pb_dir="ptbdb/"+name[0])
+
+	outfile = "Data/"+name[1]+".npy"
+
+	features = np.zeros([3,108])
+	n=0
 	for i in range(12):
 		sig = []
 		for p in range(len(signals)):
@@ -45,11 +45,15 @@ for currentfolder in folders:
 			for m in range(len(ewt)):
 				sub_band.append(ewt[m][p])
 			np.array(sub_band)
-			f_v.write(str(st.kurtosis(sub_band))+'\n')
-			p_v.write(str(entropy(sub_band))+"\n")
-			y_v.write(str(st.skew(sub_band))+'\n')
 
+			features[0][n] = st.kurtosis(sub_band)
+			features[1][n] = entropy(sub_band)
+			features[2][n] = st.skew(sub_band)
 
+			n +=1
+
+	np.save(outfile,features)
+	
 stop = timeit.default_timer()
 
 print('Time: ', stop - start)  
